@@ -1,0 +1,67 @@
+<div style="border:1px solid black;" class="card-top container-fluid">
+  <div>
+    <h4>Shop by Categories:</h4>
+  </div>
+  <div class="container d-flex">
+    <div class="item">
+      <a (click)="filter('')">
+        <img src="https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100" alt="">
+        <h6>All products</h6>
+      </a>
+    </div>
+    <div class="item">
+      <a (click)="filter('electronics')">
+        <img src="https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100" alt="">
+        <h6>Electronics</h6>
+      </a>
+    </div>
+    <div class="item">
+      <a (click)="filter('fashion')">
+        <img src="https://rukminim1.flixcart.com/flap/128/128/image/82b3ca5fb2301045.png?q=100" alt="">
+        <h6>Fashion</h6>
+      </a>
+    </div>
+    <div class="item">
+      <a (click)="filter('jewelery')">
+        <img style="width: 62px; margin-top: 5px;" src="https://rukminim1.flixcart.com/image/580/696/kkh6zrk0/jewellery-set/o/w/z/gt-ns-862-matushri-art-original-imafzt9teacakjyn.jpeg?q=50" alt="">
+        <h6>Jewllery</h6>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <label for="sort-select">Sort by:</label>
+      <select class="form-select" id="sort-select" [(ngModel)]="sortBy" (change)="sortProducts()">
+        <option value="">Select an option</option>
+        <option value="title">Title</option>
+        <option value="price">Price</option>
+      </select>
+    </div>
+    <div class="col-md-10">
+      <ng-container *ngIf="ProductsCatalog">
+        <div class="row">
+          <ng-container *ngFor="let item of filterCategory | filter:searchKey:'title'">
+            <div class="card col-md-3">
+              <img src="{{item.image}}" alt="">
+              <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
+              <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>
+              <p><strong>Price:</strong> ${{item.price}}</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <button class="btn btn-dark" (click)="addtocart(item)">Add to cart</button>
+                </div>
+                <ng-container *ngIf="item.quantity>1">
+                  <div>
+                    <span class="badge bg-secondary">{{item.quantity}}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
